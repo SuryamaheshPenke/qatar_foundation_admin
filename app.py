@@ -10,7 +10,7 @@ import os
 from models import db, Admin, Opportunity
 
 app = Flask(__name__)
-app.config.from_object(Config)
+# app.config.from_object(Config)
 
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
