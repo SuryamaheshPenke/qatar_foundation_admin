@@ -11,15 +11,25 @@ from models import db, Admin, Opportunity
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.config["SECRET_KEY"] = "qatar_foundation_secure_2026"
+
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
+
+# app.config["MAIL_SERVER"] = "smtp.gmail.com"
+# app.config["MAIL_PORT"] = 587
+# app.config["MAIL_USE_TLS"] = True
+# app.config["MAIL_USERNAME"] = "suryamahesh039@gmail.com"
+# app.config["MAIL_PASSWORD"] = "ywkd ejox ljnt xdwv"
+# app.config["MAIL_DEFAULT_SENDER"] = "suryamahesh039@gmail.com"
+
+app.config["MAIL_SERVER"] = os.getenv("MAIL_SERVER", "smtp.gmail.com")
+app.config["MAIL_PORT"] = int(os.getenv("MAIL_PORT", 587))
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = "suryamahesh039@gmail.com"
-app.config["MAIL_PASSWORD"] = "ywkd ejox ljnt xdwv"
-app.config["MAIL_DEFAULT_SENDER"] = "suryamahesh039@gmail.com"
+app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
+app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
+app.config["MAIL_DEFAULT_SENDER"] = os.getenv("MAIL_DEFAULT_SENDER")
+
 ALLOWED_CATEGORIES = [
     "Technology",
     "technology",
