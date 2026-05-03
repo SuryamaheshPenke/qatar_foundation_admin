@@ -1,203 +1,190 @@
-# 📘 CertifyMe — Full Stack Intern Assessment
+# Qatar Foundation Admin Portal
+
+A Flask-based admin management portal for handling opportunities, learners, verifiers, and collaborators with secure authentication, password reset, and dashboard features.
 
 ---
 
-## 🚀 Getting Started
+## 📌 Project Overview
 
-1. **Clone the provided repository**
-   ```bash
-   git clone https://github.com/Neerajvs32/Test1.git
-   ```
+This project was built as an admin portal where administrators can:
 
-2. **Create your own GitHub repository**
-   - Push the cloned project to your own GitHub account.
-   - Share your repository link after completing the task.
-
-3. **Development Requirement**
-   - Both Frontend and Backend must run together.
-   - The UI must remain exactly the same.
-   - ❌ Do NOT modify frontend design or components.
-   - ✅ Build the backend required for the existing UI functionality.
+* Register and log in securely
+* Manage opportunities (Create / Read / Update / Delete)
+* View dashboard statistics
+* Manage learners, verifiers, and collaborators
+* Reset forgotten passwords through email
+* Stay logged in with persistent sessions
 
 ---
 
-## 🏢 Project Overview
+## 🚀 Features
 
-This project is part of the **CertifyMe Full Stack Intern Assessment**. The repository already contains a complete Admin UI. Your responsibility is to **build the backend and connect it with the existing frontend**.
+### Authentication
 
-### Objectives
-- Build backend APIs using Flask
-- Connect frontend with backend
-- Store and retrieve data from database
-- Make the application fully functional
+* Admin Sign Up
+* Admin Login
+* Remember Me session support
+* Forgot Password via email reset link
+* Secure password hashing
+* Logout
 
-### 🔗 Original Repository
-[https://github.com/Neerajvs32/Test1](https://github.com/Neerajvs32/Test1)
+### Opportunity Management
 
----
+* Add new opportunities
+* View all opportunities
+* Edit existing opportunities
+* Delete opportunities
+* Data stored in SQLite database
+* Only creator/admin can manage their own records
 
-## ⚙️ Tech Stack
+### Dashboard
 
-| Layer | Technology |
-|---|---|
-| Backend | Python |
-| Framework | Flask |
-| Database | SQLite / MySQL / PostgreSQL |
-| Frontend | Pre-built Admin UI |
-
----
-
-## 🧩 Features & User Stories
-
----
-
-### ✅ Task 1 — Authentication *(Day 1)*
+* Sidebar navigation
+* Search UI
+* Stats cards
+* Responsive layout
+* Dark / Light mode (if enabled)
 
 ---
 
-#### US-1.1 — Admin Sign Up
+## 🛠️ Tech Stack
 
-**Required Fields**
-- Full Name
-- Email
-- Password
-- Confirm Password
+### Backend
 
-**Validations**
-- All fields mandatory
-- Email must be valid
-- Password minimum 8 characters
-- Passwords must match
-- Email must be unique
+* Python
+* Flask
+* Flask-SQLAlchemy
+* Flask-Login
+* Flask-Mail
+* Werkzeug Security
 
-**Expected Result**
-- Save admin account
-- Redirect to Login page
+### Frontend
 
----
+* HTML5
+* CSS3
+* JavaScript
 
-#### US-1.2 — Admin Login
+### Database
 
-**Fields**
-- Email
-- Password
-- Remember Me checkbox
-
-**Rules**
-- Show generic error on failure:
-  ```
-  Invalid email or password
-  ```
-
-**Expected Result**
-- Redirect to dashboard
-- Load opportunities created by the admin
-
-**Session Handling**
-
-| Condition | Behaviour |
-|---|---|
-| Remember Me checked | Long-lived session |
-| Remember Me unchecked | Session ends when browser closes |
+* SQLite
 
 ---
 
-#### US-1.3 — Forgot Password
+## 📁 Project Structure
 
-**Requirements**
-- Admin enters their email
-- Always show the same success message (regardless of whether email exists)
-
-**Behaviour**
-- Generate reset link internally
-- No email sending required
-
-**Security**
-- Reset link expires after **1 hour**
-- Expired link shows an error
-
----
-
-### ✅ Task 2 — Opportunity Management *(Day 2)*
-
-> All opportunities must be stored in the database, linked to the logged-in admin, and must never use hardcoded data.
-
----
-
-#### US-2.1 — View All Opportunities
-
-**Each opportunity card must display:**
-- Opportunity Name
-- Category
-- Duration
-- Start Date
-- Description
-
-**Rules**
-- Show only the logged-in admin's opportunities
-- Remove all demo / hardcoded cards
-- Show an empty state if no opportunities exist
+```text
+qatar_foundation_admin/
+│── app.py
+│── config.py
+│── models.py
+│── routes.py
+│── requirements.txt
+│── README.md
+│
+├── instance/
+│   └── data.db
+│
+├── static/
+│   ├── admin.css
+│   └── admin.js
+│
+└── templates/
+    └── index.html
+```
 
 ---
 
-#### US-2.2 — Add New Opportunity
+## ⚙️ Installation Steps
 
-**Required Fields**
-- Opportunity Name
-- Duration
-- Start Date
-- Description
-- Skills to Gain *(comma separated)*
-- Category
-- Future Opportunities
+### 1. Clone or Download Project
 
-**Optional Field**
-- Maximum Applicants
+Place project folder in your local machine.
 
-**Category Options**
-- Technology
-- Business
-- Design
-- Marketing
-- Data Science
-- Other
+### 2. Create Virtual Environment
 
-**Expected Result**
-- Validate all required fields
-- Save opportunity to database
-- Link opportunity to logged-in admin
-- Display immediately **without page refresh**
+```bash
+python -m venv venv
+```
 
----
+### 3. Activate Virtual Environment
 
-#### US-2.3 — Opportunities Persist After Login
+#### Windows
 
-- Opportunities must load after logout / login cycles
-- Stored only in the database — **no local storage usage**
-- Admins cannot access other admins' data
+```bash
+venv\Scripts\activate
+```
 
----
+#### Mac/Linux
 
-#### US-2.4 — View Opportunity Details
+```bash
+source venv/bin/activate
+```
 
-- Open a details modal
-- Show all saved fields
-- Close button available
+### 4. Install Dependencies
 
----
+```bash
+pip install -r requirements.txt
+```
 
-#### US-2.5 — Edit Opportunity
+### 5. Run Application
 
-- Edit button opens a pre-filled form
-- Apply the same validations as during creation
-- Update only the selected opportunity
-- Reflect changes instantly **without page refresh**
+```bash
+python app.py
+```
+
+### 6. Open Browser
+
+```text
+http://127.0.0.1:5000
+```
 
 ---
 
-#### US-2.6 — Delete Opportunity
+## 📧 Email Password Reset Setup
 
-- Show a confirmation dialog before deletion
-- Delete permanently from the database
-- Remove from UI immediately **without page refresh**
-- Only the creator admin can delete their own opportunity
+Update `config.py`
+
+```python
+MAIL_USERNAME = "suryamahesh039@gmail.com"
+MAIL_PASSWORD = "****"
+```
+
+Use Gmail App Password (recommended).
+
+---
+
+## 🔐 Default Security Features
+
+* Password hashing
+* Session authentication
+* Protected routes
+* Ownership checks for records
+* Expiring password reset tokens
+
+---
+
+## 📌 Notes
+
+* Phone reset links work when using local IP and same Wi-Fi network.
+* SQLite database auto-creates on first run.
+* Flask debug mode enabled for development only.
+
+---
+
+## 🚀 Future Improvements
+
+* Deploy to Render / Railway
+* Admin roles & permissions
+* File uploads
+* Reports export (CSV/PDF)
+* Notifications system
+* Better analytics dashboard
+
+---
+
+## 👨‍💻 Author
+
+Developed by Surya
+
+---
+
