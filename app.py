@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer
 import re
 import routes
+import os
 
 from models import db, Admin, Opportunity
 
@@ -21,11 +22,17 @@ app.config["MAIL_PASSWORD"] = "ywkd ejox ljnt xdwv"
 app.config["MAIL_DEFAULT_SENDER"] = "suryamahesh039@gmail.com"
 ALLOWED_CATEGORIES = [
     "Technology",
+    "technology",
     "Business",
+    "business",
     "Design",
+    "design",
     "Marketing",
+    "marketing",
     "Data Science",
-    "Other"
+    "data science",
+    "Other",
+    "other"
 ]
 
 mail = Mail(app)
@@ -296,4 +303,5 @@ def delete(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
